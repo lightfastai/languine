@@ -5,6 +5,7 @@ import { dirname } from "node:path";
 import { createParser } from "@/parsers/index.ts";
 import type { Config } from "@/types.js";
 import { client } from "@/utils/api.js";
+import { protectionBypassHeaders } from "@/utils/bypass.js";
 import { configFile, loadConfig } from "@/utils/config.ts";
 import { getGitInfo } from "@/utils/git.ts";
 import { LockFileManager } from "@/utils/lock.ts";
@@ -304,7 +305,10 @@ export async function translateCommand(args: string[] = []) {
       const totalsByLocale = new Map<string, { done: number; total: number }>();
       const accumulated: TranslationResult = { translations: {} };
 
-      const headers: Record<string, string> = { Accept: "text/event-stream" };
+      const headers: Record<string, string> = {
+        Accept: "text/event-stream",
+        ...protectionBypassHeaders(),
+      };
       if (apiKey) headers["x-api-key"] = apiKey;
 
       const response = await fetch(`${baseUrl}/api/jobs/${runId}/stream`, {

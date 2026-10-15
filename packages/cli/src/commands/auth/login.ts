@@ -1,3 +1,4 @@
+import { protectionBypassHeaders } from "@/utils/bypass.js";
 import { saveSession } from "@/utils/session.ts";
 import { intro, note, outro, password, text } from "@clack/prompts";
 import chalk from "chalk";
@@ -33,7 +34,7 @@ async function pingApiKey(baseUrl: string, apiKey: string): Promise<boolean> {
       `${baseUrl}/api/trpc/project.list?batch=1&input=${encodeURIComponent(
         JSON.stringify({ "0": { json: null, meta: { values: ["undefined"] } } }),
       )}`,
-      { headers: { "x-api-key": apiKey } },
+      { headers: { "x-api-key": apiKey, ...protectionBypassHeaders() } },
     );
     return res.status !== 401;
   } catch {

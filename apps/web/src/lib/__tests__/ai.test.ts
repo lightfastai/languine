@@ -34,4 +34,9 @@ describe("lib/ai", () => {
     getModel();
     expect(lastModelSlug).toBe("anthropic/claude-sonnet-4");
   });
+
+  test("asks Anthropic models for low effort", async () => {
+    const { MODEL_PROVIDER_OPTIONS } = await import("../ai");
+    expect(MODEL_PROVIDER_OPTIONS).toEqual({ anthropic: { effort: "low" } });
+  });
 });

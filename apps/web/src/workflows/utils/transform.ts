@@ -1,4 +1,4 @@
-import { getModel } from "../../lib/ai";
+import { MODEL_PROVIDER_OPTIONS, getModel } from "../../lib/ai";
 import { NoObjectGeneratedError, generateObject } from "ai";
 import { z } from "zod";
 
@@ -47,7 +47,7 @@ ${JSON.stringify(truncatedTranslations, null, 2)}`;
     const { object } = await generateObject({
       model: getModel(),
       prompt,
-      temperature: 0.2,
+      providerOptions: MODEL_PROVIDER_OPTIONS,
       schema,
     });
 
