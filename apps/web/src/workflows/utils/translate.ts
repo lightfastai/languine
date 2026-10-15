@@ -17,7 +17,6 @@ export async function translateKeys(
   const { object } = await generateObject({
     model: getModel(),
     prompt,
-    temperature: 0.2,
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     providerOptions: MODEL_PROVIDER_OPTIONS,
     schema: z.object({
@@ -42,7 +41,6 @@ export async function translateDocument(
   const { object } = await generateObject({
     model: getModel(),
     prompt,
-    temperature: 0.2,
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     providerOptions: MODEL_PROVIDER_OPTIONS,
     schema: z.object({

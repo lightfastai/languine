@@ -47,7 +47,6 @@ ${JSON.stringify(truncatedTranslations, null, 2)}`;
     const { object } = await generateObject({
       model: getModel(),
       prompt,
-      temperature: 0.2,
       providerOptions: MODEL_PROVIDER_OPTIONS,
       schema,
     });
