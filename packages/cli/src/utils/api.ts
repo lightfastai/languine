@@ -1,3 +1,4 @@
+import { protectionBypassHeaders } from "@/utils/bypass.js";
 import { loadEnv } from "@/utils/env.js";
 import { getAPIKey, requireBaseUrl } from "@/utils/session.js";
 import { note } from "@clack/prompts";
@@ -29,6 +30,7 @@ function buildClient(): Client {
           return {
             "x-api-key": apiKey || undefined,
             "x-trpc-source": "cli",
+            ...protectionBypassHeaders(),
           };
         },
         fetch: async (url, options) => {
